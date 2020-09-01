@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import ListExpte from "./components/CRUD/listExpte";
+import EditExpte from "./components/CRUD/editExpte";
+import CreateExpte from "./components/CRUD/createExpte";
+import DeleteExpte from "./components/CRUD/deleteExpte";
+
+const App = () => {
+    return (
+        <Router>
+            <div className="container">
+                <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <Link to="/" className="navbar-brand">
+                        AGRIPANEL
+                    </Link>
+                    <div className="collapse navbar-collapse">
+                        <ul className="navbar-nav mr-auto">
+                            <li className="navbar-item">
+                                <Link to="/" className="nav-link">
+                                    List Exptes
+                                </Link>
+                            </li>
+                            <li className="navbar-item">
+                                <Link to="/create" className="nav-link">
+                                    Create Expte
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <br />
+                <Route path="/" exact component={ListExpte} />
+                <Route path="/edit/:id" component={EditExpte} />
+                <Route path="/create" component={CreateExpte} />
+                <Route path="/delete/:id" component={DeleteExpte} />
+            </div>
+        </Router>
+    );
+};
 
 export default App;
